@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import { Box, Button, Container, Grid, Theme, Typography, useMediaQuery } from '@mui/material';
 import header from '../../../assets/header.png';
@@ -11,6 +11,7 @@ interface Props {
 
 const Component: FC<Props> = ({ className }) => {
     const mobile = useMediaQuery(({ breakpoints }: Theme) => breakpoints.down('sm'));
+    const [imgLoad, setImgLoad] = useState(false);
 
     return (
         <Element name="header" className={className}>
@@ -18,31 +19,38 @@ const Component: FC<Props> = ({ className }) => {
                 <div className="full-width">
                     <Grid
                         container
-                        spacing={4}
+                        rowSpacing={4}
                         alignItems="center"
-                        justifyContent="center"
+                        justifyContent={{ md: 'flex-start', xs: 'center' }}
                         textAlign={{ xs: 'center', md: 'left' }}
                     >
-                        <Grid item md={8} order={{ xs: 2, md: 1 }}>
-                            <Typography variant="h1">
+                        <Grid item md={7} order={{ xs: 2, md: 1 }}>
+                            <Typography className={`smooth ${imgLoad ? 'visible' : 'hidden'}`} variant="h1">
                                 We turn{' '}
                                 <Box component="span" fontStyle="italic">
                                     your
                                 </Box>
                             </Typography>
-                            <Typography variant="h1">
+                            <Typography className={`smooth ${imgLoad ? 'visible' : 'hidden'}`} variant="h1">
                                 <Box component="span" fontStyle="italic">
                                     ideas
                                 </Box>{' '}
                                 into
                             </Typography>
-                            <Typography variant="h1" marginBottom={4.25}>
+                            <Typography
+                                className={`smooth ${imgLoad ? 'visible' : 'hidden'}`}
+                                variant="h1"
+                                marginBottom={4.25}
+                            >
                                 beautiful products
                             </Typography>
-                            <Typography marginBottom={11.4285}>And we are ready to collaborate with you!</Typography>
+                            <Typography className={`smooth ${imgLoad ? 'visible' : 'hidden'}`} marginBottom={11.4285}>
+                                And we are ready to collaborate with you!
+                            </Typography>
                             <Button
                                 variant="contained"
                                 size="large"
+                                className={`smooth ${imgLoad ? 'visible' : 'hidden'}`}
                                 onClick={() =>
                                     scroller.scrollTo('contact', {
                                         duration: 300,
@@ -56,7 +64,12 @@ const Component: FC<Props> = ({ className }) => {
                             </Button>
                         </Grid>
                         <Grid item md order={{ xs: 1, md: 2 }}>
-                            <img src={header} width={mobile ? '75%' : '100%'} />
+                            <img
+                                className={`smooth ${imgLoad ? 'visible' : 'hidden'}`}
+                                onLoad={() => setImgLoad(true)}
+                                src={header}
+                                width={mobile ? '75%' : '80%'}
+                            />
                         </Grid>
                     </Grid>
                 </div>
@@ -87,5 +100,20 @@ export default styled(Component)`
         right: 0;
         width: 100%;
         height: 100%;
+        z-index: -1;
+    }
+
+    .smooth {
+        transition: all 0.4s;
+    }
+
+    .visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .hidden {
+        opacity: 0;
+        transform: translateY(25%);
     }
 `;

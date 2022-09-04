@@ -1,11 +1,17 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { Box, Container, Grid, Theme, useMediaQuery } from '@mui/material';
-import { SubHeader, TeamBlock } from '../components';
+import { SubHeader, TeamBlock } from '../../../components';
 import { Element } from 'react-scroll';
-import volbil from '../../../assets/team/volbil.png';
-import team_back from '../../../assets/team_back.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
+
+import volbil from '../../../assets/team/volbil.png';
+import olexh from '../../../assets/team/olexh.png';
+import olexb from '../../../assets/team/olexb.png';
+import yaroslav from '../../../assets/team/yaroslav.jpg';
+import khadai from '../../../assets/team/khadai.jpg';
+import vlad from '../../../assets/team/vlad.jpeg';
+import team_back from '../../../assets/team_back.png';
 
 interface Props {
     className?: string;
@@ -17,21 +23,21 @@ const Component: FC<Props> = ({ className }) => {
         <TeamBlock
             key={0}
             img={volbil}
-            title="Volodymyr Biloshytskyi"
-            description="AppleCare+ benefits are in addition to a consumer’s right to a free-of-charge repair or replacement, by the seller, of goods that do not conform with the contract of sale. "
+            firstName="Volodymyr"
+            lastName="Biloshytskyi"
+            description="Blockchain Engineer"
         />,
+        <TeamBlock key={1} img={olexb} firstName="Oleh" lastName="Basystiuk" description="ML Engineer" />,
+        <TeamBlock key={2} img={olexh} firstName="Oleh" lastName="Nykoliak" description="React Native Engineer" />,
         <TeamBlock
-            key={1}
-            img={volbil}
-            title="Volodymyr Biloshytskyi"
-            description="AppleCare+ benefits are in addition to a consumer’s right to a free-of-charge repair or replacement, by the seller, of goods that do not conform with the contract of sale. "
+            key={3}
+            img={yaroslav}
+            firstName="Yaroslav"
+            lastName="Biloshytskyi"
+            description="Back-end Engineer"
         />,
-        <TeamBlock
-            key={2}
-            img={volbil}
-            title="Volodymyr Biloshytskyi"
-            description="AppleCare+ benefits are in addition to a consumer’s right to a free-of-charge repair or replacement, by the seller, of goods that do not conform with the contract of sale. "
-        />,
+        <TeamBlock key={4} img={vlad} firstName="Vladyslav" lastName="Vereskun" description="UI/UX Designer" />,
+        <TeamBlock key={5} img={khadai} firstName="Mykhailo" lastName="Khadai" description="React Engineer" />,
     ];
 
     const subheader = (

@@ -23,15 +23,24 @@ const Component: FC<Props> = ({ className, title, description, img }) => {
 };
 
 export default styled(Component)`
+    transition: 0.2s all;
+
     img {
         width: 100%;
         height: 214px;
         object-fit: contain;
     }
 
-    background: ${({ theme, variant }) =>
-        variant === 'secondary' ? theme.palette.secondary.light : theme.palette.secondary.main};
+    background: ${({ theme }) => theme.palette.secondary.main};
     border-radius: 20px;
     padding: ${({ theme }) => theme.spacing(67 / 8, 43 / 8)};
-    border: ${({ variant }) => variant === 'secondary' && '1px solid rgba(256, 256, 256, 0.16)'};
+    border: 1px solid ${({ theme }) => theme.palette.secondary.main};
+
+    ${({ theme }) => theme.breakpoints.up('sm')} {
+        &:hover {
+            border-color: rgba(256, 256, 256, 0.16);
+            background: ${({ theme }) => theme.palette.secondary.light};
+            transform: translateY(${({ theme }) => theme.spacing(-3)});
+        }
+    }
 `;

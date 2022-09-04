@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Container, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Typography } from '@mui/material';
 import styled from 'styled-components';
 import { MdOutlineClose } from 'react-icons/md';
+import { useHistory } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
 
 const Component: FC<Props> = ({ className, isDrawerOpened, setIsDrawerOpened }) => {
     const onClose = () => setIsDrawerOpened(false);
+    const history = useHistory();
 
     const scrollTo = (name: string) => {
         scroller.scrollTo(name, {
@@ -20,6 +22,11 @@ const Component: FC<Props> = ({ className, isDrawerOpened, setIsDrawerOpened }) 
             smooth: true,
             offset: -100,
         });
+        onClose();
+    };
+
+    const goTo = (name: string) => {
+        history.push(name);
         onClose();
     };
 
@@ -40,48 +47,72 @@ const Component: FC<Props> = ({ className, isDrawerOpened, setIsDrawerOpened }) 
             </Container>
             <List className="mobile-list">
                 <ListItem className="link">
-                    <ListItemButton onClick={() => scrollTo('about')}>
+                    <ListItemButton onClick={() => goTo('/')}>
                         <ListItemText
                             className="link-text"
                             primary={
                                 <Typography variant="h6" textTransform="uppercase">
-                                    About
+                                    Home
                                 </Typography>
                             }
                         />
                     </ListItemButton>
                 </ListItem>
                 <ListItem className="link">
-                    <ListItemButton onClick={() => scrollTo('clients')} href="#">
+                    <ListItemButton onClick={() => goTo('/web')} href="#">
                         <ListItemText
                             className="link-text"
                             primary={
                                 <Typography variant="h6" textTransform="uppercase">
-                                    Clients
+                                    Web
                                 </Typography>
                             }
                         />
                     </ListItemButton>
                 </ListItem>
                 <ListItem className="link">
-                    <ListItemButton onClick={() => scrollTo('technologies')} href="#">
+                    <ListItemButton onClick={() => goTo('/mobile')} href="#">
                         <ListItemText
                             className="link-text"
                             primary={
                                 <Typography variant="h6" textTransform="uppercase">
-                                    Technologies
+                                    Mobile
                                 </Typography>
                             }
                         />
                     </ListItemButton>
                 </ListItem>
                 <ListItem className="link">
-                    <ListItemButton onClick={() => scrollTo('project')} href="#">
+                    <ListItemButton onClick={() => goTo('/blockchain')} href="#">
                         <ListItemText
                             className="link-text"
                             primary={
                                 <Typography variant="h6" textTransform="uppercase">
-                                    Projects
+                                    Blockchain
+                                </Typography>
+                            }
+                        />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem className="link">
+                    <ListItemButton onClick={() => goTo('/ai')} href="#">
+                        <ListItemText
+                            className="link-text"
+                            primary={
+                                <Typography variant="h6" textTransform="uppercase">
+                                    AI
+                                </Typography>
+                            }
+                        />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem className="link">
+                    <ListItemButton onClick={() => scrollTo('contact')} href="#">
+                        <ListItemText
+                            className="link-text"
+                            primary={
+                                <Typography variant="h6" textTransform="uppercase">
+                                    Contact Us
                                 </Typography>
                             }
                         />

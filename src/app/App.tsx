@@ -6,7 +6,7 @@ import theme from './theme';
 import GlobalStyle from './GlobalStyle';
 import ScrollToTop from './ScrollToTop';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
-import { Home } from '../pages';
+import { AI, Blockchain, Home, Mobile, Web } from '../pages';
 import BackToTop from './BackToTop';
 import { Fab } from '@mui/material';
 import { CgArrowLongUp } from 'react-icons/cg';
@@ -26,6 +26,10 @@ const App = ({ ...props }) => {
                     <Navigation />
                     <Switch>
                         <Route path="/" exact component={Home} />
+                        <Route path="/web" exact component={Web} />
+                        <Route path="/mobile" exact component={Mobile} />
+                        <Route path="/blockchain" exact component={Blockchain} />
+                        <Route path="/ai" exact component={AI} />
                         <Redirect to="/" />
                     </Switch>
                     <Footer />

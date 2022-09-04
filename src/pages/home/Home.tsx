@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { About, Clients, Contact, Header, Projects, Team, Technologies } from './layout';
+import { About, Clients, Header, Team, Technologies } from './layout';
+import { Contact } from '../../components';
 
 interface Props {
     className?: string;
@@ -13,7 +14,7 @@ const Component: FC<Props> = ({ className }) => {
             <About />
             <Clients />
             <Technologies />
-            <Projects />
+            {/*<Projects />*/}
             <Team />
             <Contact />
         </div>

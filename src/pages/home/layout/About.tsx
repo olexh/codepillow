@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { Box, Container, Grid, Theme, useMediaQuery } from '@mui/material';
-import { AboutBlock, SubHeader } from '../components';
+import { AboutBlock, SubHeader } from '../../../components';
 import design from '../../../assets/about/1.png';
 import usability from '../../../assets/about/2.png';
 import engineering from '../../../assets/about/3.png';
@@ -63,7 +63,7 @@ const Component: FC<Props> = ({ className }) => {
                         <Grid item md>
                             {designBlock()}
                         </Grid>
-                        <Grid item md marginBottom={2}>
+                        <Grid item md>
                             {usabilityBlock()}
                         </Grid>
                         <Grid item md>

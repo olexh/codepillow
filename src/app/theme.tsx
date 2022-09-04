@@ -63,6 +63,9 @@ const theme = createTheme({
             light: '#292929',
             contrastText: '#181718',
         },
+        background: {
+            default: '#0B0B0B',
+        },
     },
     shape: {
         borderRadius: 10,

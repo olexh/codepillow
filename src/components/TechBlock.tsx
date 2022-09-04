@@ -1,28 +1,57 @@
-import React, { FC } from 'react';
+import React, { FC, MouseEventHandler } from 'react';
 import styled from 'styled-components';
-import { Typography } from '@mui/material';
+import { Link, SvgIcon, Typography } from '@mui/material';
+import { animated } from 'react-spring';
+import { SpringValue } from '@react-spring/web';
+import { MdOutlineArrowRightAlt } from 'react-icons/md';
 
 interface Props {
     className?: string;
     title: string;
     description: string;
     img: string;
+    URL: string;
+    enableURL?: boolean;
     size?: 'small' | 'large';
+    style?: {
+        opacity: SpringValue<number>;
+        transform?: SpringValue<string>;
+    };
+    onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
-const Component: FC<Props> = ({ className, title, description, size }) => {
+const Component: FC<Props> = ({ className, title, description, size, enableURL, URL, ...props }) => {
     return (
-        <div className={className}>
+        <animated.div className={className} {...props}>
             <div className="block" />
             <Typography variant={size === 'large' ? 'h3' : 'h4'}>{title}</Typography>
             <Typography variant={size === 'large' ? 'body1' : 'body2'} color="textSecondary">
                 {description}
             </Typography>
-        </div>
+            {Boolean(enableURL) && (
+                <Link
+                    display="flex"
+                    width="fit-content"
+                    href={URL}
+                    marginTop={7}
+                    variant="button"
+                    className="link"
+                    underline="none"
+                    target="_blank"
+                >
+                    More info
+                    <SvgIcon>
+                        <MdOutlineArrowRightAlt />
+                    </SvgIcon>
+                </Link>
+            )}
+        </animated.div>
     );
 };
 
 export default styled(Component)`
+    transition: 0.2s all;
+
     .block {
         margin-top: ${({ size }) => (size === 'large' ? '70px' : '12px')};
         position: relative;
@@ -50,5 +79,11 @@ export default styled(Component)`
             left: 50%;
             bottom: 50%;
         }
+    }
+
+    cursor: ${({ onClick }) => (onClick ? 'pointer' : 'default')};
+
+    &:hover {
+        transform: ${({ onClick }) => (onClick ? 'scale(1.1)' : 'none')};
     }
 `;

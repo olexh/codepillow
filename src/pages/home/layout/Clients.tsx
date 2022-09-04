@@ -1,11 +1,15 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { Box, Container, Grid, Theme, useMediaQuery } from '@mui/material';
-import { ClientBlock, SubHeader } from '../components';
-import client from '../../../assets/clients/client.png';
+import { ClientBlock, SubHeader } from '../../../components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Element } from 'react-scroll';
+
 import clients_back from '../../../assets/clients_back.png';
+import onston from '../../../assets/clients/onston.svg';
+import rapids from '../../../assets/clients/rapids.svg';
+import aok from '../../../assets/clients/aok.png';
+import paladeum from '../../../assets/clients/pldm.png';
 
 interface Props {
     className?: string;
@@ -16,27 +20,31 @@ const Component: FC<Props> = ({ className }) => {
     const clients = [
         <ClientBlock
             key={0}
-            title="Alphacon"
-            description="We develop cross-platform apps. Using React Native technology we"
-            img={client}
+            title="AOK"
+            description="Unique blockchain-based business platform, that help make crypto transformation smoothly."
+            img={aok}
+            onClick={() => window.open('http://www.aok.network/', '_blank')}
         />,
         <ClientBlock
             key={1}
-            title="Alphacon"
-            description="We develop cross-platform apps. Using React Native technology we"
-            img={client}
+            title="Rapids"
+            description="Platform for payments across social media through a secure network driven by community. "
+            img={rapids}
+            onClick={() => window.open('https://www.rapidsnetwork.io/', '_blank')}
         />,
         <ClientBlock
             key={2}
-            title="Alphacon"
-            description="We develop cross-platform apps. Using React Native technology we"
-            img={client}
+            title="Onston"
+            description="Virtual reality metaverse ecosystem, reinforeced with 3D virtual world and VR/AR devices."
+            img={onston}
+            onClick={() => window.open('https://onston.network/', '_blank')}
         />,
         <ClientBlock
             key={3}
-            title="Alphacon"
-            description="We develop cross-platform apps. Using React Native technology we"
-            img={client}
+            title="Paladeum"
+            description="Next-generation payment platform, that links blockchain and banking system."
+            img={paladeum}
+            onClick={() => window.open('https://paladeum.io/', '_blank')}
         />,
     ];
 
@@ -92,6 +100,7 @@ export default styled(Component)`
         right: 0;
         width: 100%;
         height: 200%;
+        z-index: -1;
     }
 
     .swiper {

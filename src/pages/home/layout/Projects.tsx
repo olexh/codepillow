@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { Box, Button, Container, Grid } from '@mui/material';
-import { ProjectBlock, SubHeader } from '../components';
+import { ProjectBlock, SubHeader } from '../../../components';
 import { Element } from 'react-scroll';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import test from '../../../assets/projects/test.png';
+import test from '../../../assets/projects/test.jpg';
 
 interface Props {
     className?: string;

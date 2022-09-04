@@ -1,10 +1,21 @@
 import React, { FC, useState } from 'react';
-import { AppBar, Container, IconButton, Theme, Typography, useMediaQuery, useScrollTrigger } from '@mui/material';
+import {
+    AppBar,
+    Container,
+    IconButton,
+    Menu,
+    MenuItem,
+    Theme,
+    Typography,
+    useMediaQuery,
+    useScrollTrigger,
+} from '@mui/material';
 import styled from 'styled-components';
 import { AiOutlineMenu } from 'react-icons/ai';
 import MobileDrawer from './MobileDrawer';
-import { Link as ScrollLink } from 'react-scroll';
 import { Logo } from '../components';
+import { Link } from 'react-router-dom';
+import { Link as ScrollLink } from 'react-scroll';
 
 interface Props {
     className?: string;
@@ -26,21 +37,29 @@ const ElevationScroll = ({ ...props }) => {
             transition: 'all 0.2s ease',
             background: trigger ? 'rgba(18, 18, 18, 0.5)' : 'transparent',
             backdropFilter: trigger ? 'blur(10px)' : 'none',
+            WebkitBackdropFilter: trigger ? 'blur(10px)' : 'none',
         },
     });
 };
 
 const Component: FC<Props> = ({ className, ...props }) => {
     const [isDrawerOpened, setIsDrawerOpened] = useState(false);
+    const [anchorFieldsEl, setAnchorFieldsEl] = React.useState<null | HTMLElement>(null);
     const mobile = useMediaQuery(({ breakpoints }: Theme) => breakpoints.down('sm'));
+    const openFieldsMenu = Boolean(anchorFieldsEl);
+
+    const handleHoverFieldsMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorFieldsEl(event.currentTarget);
+    };
+    const handleCloseFieldsMenu = () => {
+        setAnchorFieldsEl(null);
+    };
 
     const scrollLinkProps = {
         smooth: true,
         href: '#',
         duration: 300,
-        spy: true,
         offset: -100,
-        activeClass: 'active-link',
     };
 
     return (
@@ -49,28 +68,20 @@ const Component: FC<Props> = ({ className, ...props }) => {
                 <MobileDrawer isDrawerOpened={isDrawerOpened} setIsDrawerOpened={setIsDrawerOpened} />
                 <Container>
                     <div className="nav">
-                        <ScrollLink
-                            to="header"
-                            className="link"
-                            {...scrollLinkProps}
-                            offset={0}
-                            activeClass={undefined}
-                        >
+                        <Link to="/" className="link" {...scrollLinkProps}>
                             <Logo />
-                        </ScrollLink>
+                        </Link>
                         {!mobile && (
                             <div className="links">
-                                <ScrollLink to="about" className="nav-link link" {...scrollLinkProps} offset={-150}>
-                                    <Typography fontWeight="bold">About</Typography>
-                                </ScrollLink>
-                                <ScrollLink to="clients" className="nav-link link" {...scrollLinkProps}>
-                                    <Typography fontWeight="bold">Clients</Typography>
-                                </ScrollLink>
-                                <ScrollLink to="technologies" className="nav-link link" {...scrollLinkProps}>
-                                    <Typography fontWeight="bold">Technologies</Typography>
-                                </ScrollLink>
-                                <ScrollLink to="project" className="nav-link link" {...scrollLinkProps}>
-                                    <Typography fontWeight="bold">Projects</Typography>
+                                <Link to="/" className="nav-link link">
+                                    <Typography fontWeight="bold">Home</Typography>
+                                </Link>
+                                {/* @ts-ignore */}
+                                <Link to="#" onMouseOver={handleHoverFieldsMenu} className="nav-link link">
+                                    <Typography fontWeight="bold">Fields</Typography>
+                                </Link>
+                                <ScrollLink to="contact" className="nav-link link" {...scrollLinkProps}>
+                                    <Typography fontWeight="bold">Contact Us</Typography>
                                 </ScrollLink>
                             </div>
                         )}
@@ -80,6 +91,29 @@ const Component: FC<Props> = ({ className, ...props }) => {
                             </IconButton>
                         )}
                     </div>
+                    <Menu
+                        id="basic-menu"
+                        anchorEl={anchorFieldsEl}
+                        open={openFieldsMenu}
+                        onClose={handleCloseFieldsMenu}
+                        MenuListProps={{
+                            'aria-labelledby': 'basic-button',
+                            onMouseLeave: handleCloseFieldsMenu,
+                        }}
+                    >
+                        <MenuItem component={Link} to="/web" onClick={handleCloseFieldsMenu}>
+                            Web
+                        </MenuItem>
+                        <MenuItem component={Link} to="/mobile" onClick={handleCloseFieldsMenu}>
+                            Mobile
+                        </MenuItem>
+                        <MenuItem component={Link} to="/blockchain" onClick={handleCloseFieldsMenu}>
+                            Blockchain
+                        </MenuItem>
+                        <MenuItem component={Link} to="/ai" onClick={handleCloseFieldsMenu}>
+                            AI
+                        </MenuItem>
+                    </Menu>
                 </Container>
             </AppBar>
         </ElevationScroll>

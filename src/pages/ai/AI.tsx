@@ -1,0 +1,21 @@
+import React, { FC } from 'react';
+import styled from 'styled-components';
+import { Header, Technologies } from './layout';
+import { Contact, Steps } from '../../components';
+
+interface Props {
+    className?: string;
+}
+
+const Component: FC<Props> = ({ className }) => {
+    return (
+        <div className={className}>
+            <Header />
+            <Technologies />
+            <Steps />
+            <Contact />
+        </div>
+    );
+};
+
+export default styled(Component)``;

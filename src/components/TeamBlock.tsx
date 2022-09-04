@@ -5,17 +5,19 @@ import { Typography } from '@mui/material';
 interface Props {
     className?: string;
     img: string;
-    title: string;
+    firstName: string;
+    lastName: string;
     description: string;
 }
 
-const Component: FC<Props> = ({ className, title, description }) => {
+const Component: FC<Props> = ({ className, firstName, lastName, description }) => {
     return (
         <div className={className}>
             <div className="block" />
             <Typography variant="h3" marginTop={3}>
-                {title}
+                {firstName}
             </Typography>
+            <Typography variant="h3">{lastName}</Typography>
             <Typography color="textSecondary">{description}</Typography>
         </div>
     );
